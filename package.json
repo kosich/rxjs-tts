@@ -24,9 +24,13 @@
     "url": "git+https://github.com/kosich/rxjs-tts.git"
   },
   "keywords": [
-    "redux",
+    "text-to-speech",
+    "speech synthesis",
+    "t2s",
+    "Web Speech API",
     "rxjs",
-    "state"
+    "javascript",
+    "typescript"
   ],
   "author": "Kostiantyn Palchyk",
   "license": "MIT",
