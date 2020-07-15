@@ -10,7 +10,7 @@ export interface SpeechSynthesisUtteranceConfig {
     voice?: SpeechSynthesisVoice;
 }
 
-const optionsKeys = ['text', 'voice', 'volume', 'rate', 'pitch', 'lang'];
+const optionsKeys:(keyof SpeechSynthesisUtteranceConfig)[] = ['text', 'voice', 'volume', 'rate', 'pitch', 'lang'];
 
 export function speak(value: string | SpeechSynthesisUtteranceConfig | SpeechSynthesisUtterance) {
     const voice$ = new Observable((observer) => {
@@ -75,4 +75,7 @@ export function speak(value: string | SpeechSynthesisUtteranceConfig | SpeechSyn
     return timer(4).pipe(
         switchMapTo(voice$)
     );
+
+    // TODO: consider using share() for result since there would always be only
+    // one running instance at a given time
 }
