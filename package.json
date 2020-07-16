@@ -1,6 +1,6 @@
 {
   "name": "rxjs-tts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "RxJS text-to-speech wrapper",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
