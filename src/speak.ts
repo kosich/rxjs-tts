@@ -24,7 +24,8 @@ export function speak(value: string | SpeechSynthesisUtteranceConfig | SpeechSyn
           utterance = new SpeechSynthesisUtterance();
           optionsKeys.forEach(key => {
             if (key in value) {
-              utterance[key] = value[key];
+              // ts complains that utterance[key] is `never`
+              (utterance[key] as any) = value[key];
             }
           });
         } else {
