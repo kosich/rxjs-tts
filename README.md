@@ -1,16 +1,31 @@
-# RxJS wrapper for Text-to-Speech
-
-```
-npm i rxjs-tts
-```
-
-Try it online: https://stackblitz.com/edit/rxjs-tts?file=index.ts
-
-## About
+<div align="center">
+  <h1>
+    <br/>
+    🗣
+    <br/>
+    <sub><sub>Web API Text-to-Speech with RxJS</sub></sub>
+    <br/>
+    <br/>
+    <a href="https://www.npmjs.com/package/rxjs-tts"><img src="https://img.shields.io/npm/v/rxjs-tts" alt="NPM"></a>
+    <a href="https://bundlephobia.com/result?p=rxjs-tts@latest"><img src="https://img.shields.io/bundlephobia/minzip/rxjs-tts?label=gzipped" alt="Bundlephobia"></a>
+    <a href="https://opensource.org/licenses/MIT" rel="nofollow"><img src="https://img.shields.io/npm/l/rxjs-tts" alt="MIT license"></a>
+    <br/>
+    <br/>
+    <br/>
+  </h1>
+</div>
 
 This is a RxJS wrapper around browser native [SpeechSynthesis](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis).
 
 It provides handy interface for chaining and aborting TTS.
+
+Try it [**online**](https://stackblitz.com/edit/rxjs-tts?file=index.ts)
+
+## Install
+
+```
+npm i rxjs-tts
+```
 
 ## Usage
 
@@ -67,3 +82,5 @@ concat(
   console.log(e.type);
 });
 ```
+
+## Enjoy 🙂
