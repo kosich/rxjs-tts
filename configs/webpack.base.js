@@ -8,7 +8,7 @@ module.exports = {
         library: 'rxjs-tts',
         libraryTarget: 'umd',
         publicPath: '/dist/',
-        umdNamedDefine: true
+        umdNamedDefine: true,
     },
     module: {
         rules: [
@@ -19,16 +19,15 @@ module.exports = {
                     {
                         loader: 'ts-loader',
                         options: {
-                            configFile: 'configs/tsconfig.esm.json'
-                        }
-
-                    }
-                ]
+                            configFile: 'configs/tsconfig.esm.json',
+                        },
+                    },
+                ],
             },
-        ]
+        ],
     },
     resolve: {
-        extensions: ['.ts']
+        extensions: ['.ts'],
     },
     externals: [
         // externalisation of rxjs
@@ -41,11 +40,11 @@ module.exports = {
                     root: parts,
                     commonjs: request,
                     commonjs2: request,
-                    amd: request
+                    amd: request,
                 });
             }
 
             callback();
-        }
-    ]
+        },
+    ],
 };

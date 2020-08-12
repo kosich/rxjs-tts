@@ -10,27 +10,39 @@ export interface SpeechSynthesisUtteranceConfig {
     voice?: SpeechSynthesisVoice;
 }
 
-const optionsKeys:(keyof SpeechSynthesisUtteranceConfig)[] = ['text', 'voice', 'volume', 'rate', 'pitch', 'lang'];
+const optionsKeys: (keyof SpeechSynthesisUtteranceConfig)[] = [
+    'text',
+    'voice',
+    'volume',
+    'rate',
+    'pitch',
+    'lang',
+];
 
-export function speak(value: string | SpeechSynthesisUtteranceConfig | SpeechSynthesisUtterance) {
+export function speak(
+    value: string | SpeechSynthesisUtteranceConfig | SpeechSynthesisUtterance,
+) {
     const voice$ = new Observable((observer) => {
-        
         let utterance: SpeechSynthesisUtterance;
         if (typeof value == 'string') {
-          utterance = new SpeechSynthesisUtterance(value);
+            utterance = new SpeechSynthesisUtterance(value);
         } else if (value instanceof SpeechSynthesisUtterance) {
-          utterance = value;
+            utterance = value;
         } else if (value && typeof value.text == 'string') {
-          utterance = new SpeechSynthesisUtterance();
-          optionsKeys.forEach(key => {
-            if (key in value) {
-              // ts complains that utterance[key] is `never`
-              (utterance[key] as any) = value[key];
-            }
-          });
+            utterance = new SpeechSynthesisUtterance();
+            optionsKeys.forEach((key) => {
+                if (key in value) {
+                    // ts complains that utterance[key] is `never`
+                    (utterance[key] as any) = value[key];
+                }
+            });
         } else {
-          observer.error(new Error('Unrecognized input: pass string | SpeechSynthesisUtteranceConfig | SpeechSynthesisUtterance to speak(...) function.'));
-          observer.complete(); // < not sure if this is needed
+            observer.error(
+                new Error(
+                    'Unrecognized input: pass string | SpeechSynthesisUtteranceConfig | SpeechSynthesisUtterance to speak(...) function.',
+                ),
+            );
+            observer.complete(); // < not sure if this is needed
         }
 
         // subscibe to Utterance events
@@ -41,7 +53,7 @@ export function speak(value: string | SpeechSynthesisUtteranceConfig | SpeechSyn
         const start$ = fromEvent(utterance, 'start');
         // error -- as errors on Observable
         const error$ = fromEvent(utterance, 'error').pipe(
-            switchMap(e => throwError(e))
+            switchMap((e) => throwError(e)),
         );
         // end -- completes Observable
         const end$ = fromEvent(utterance, 'end');
@@ -52,12 +64,10 @@ export function speak(value: string | SpeechSynthesisUtteranceConfig | SpeechSyn
             pause$,
             resume$,
             start$,
-            error$
+            error$,
         )
-        .pipe(
-            takeUntil(end$)
-        )
-        .subscribe(observer);
+            .pipe(takeUntil(end$))
+            .subscribe(observer);
 
         speechSynthesis.speak(utterance);
         speechSynthesis.resume();
@@ -73,9 +83,7 @@ export function speak(value: string | SpeechSynthesisUtteranceConfig | SpeechSyn
     });
 
     // make a pause to let speechSynthesis.cancel pass
-    return timer(4).pipe(
-        switchMapTo(voice$)
-    );
+    return timer(4).pipe(switchMapTo(voice$));
 
     // TODO: consider using share() for result since there would always be only
     // one running instance at a given time

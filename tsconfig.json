@@ -9,9 +9,6 @@
         "target": "es2015",
         "sourceMap": true,
         "downlevelIteration": true,
-        "lib": [
-            "dom",
-            "dom.iterable"
-        ]
+        "lib": ["dom", "dom.iterable"]
     }
 }
